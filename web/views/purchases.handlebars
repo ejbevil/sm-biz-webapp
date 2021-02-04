@@ -1,0 +1,101 @@
+<div class="content">
+    <ul>
+        <li> Enter a new purchase
+        <li> View all past sales
+        <li> View purchases by store
+    </ul>
+
+    <h2>Enter New Purchase:</h2>
+
+    <form action="/enterpurchase" method="post" id="purchentryform">
+        <fieldset>
+            <label for "date">Date: </label>
+            <input type="date" name="date" required><br>
+     
+            <label for="transaction">Transaction No: </label>
+            <input type="text" name="transaction" required><br>
+            
+            <label for="pid">Product: </label>
+            <select name="pid" required>
+                <option value="" disabled="disabled" selected="selected">[select product]</option>
+                {{#each pids}}
+                <option value="{{id}}">{{modeldesc}}</option>
+                {{/each}}
+            </select>
+            
+            <label for="qty">&emsp;Quantity: </label>
+            <input type="number" name="qty" value="1" min="1" step="1" required><br>
+            
+            <label for="cid">Customer: </label>
+            <select name="cid" required>
+                <option value="" disabled="disabled" selected="selected">[select customer]</option>
+                {{#each cids}}
+                <option value="{{id}}">{{name}}  ({{id}})</option>
+                {{/each}}
+            </select><br>
+            
+            <label for="sid">Store: </label>
+            <select name="sid" required>
+                <option value="" disabled="disabled" selected="selected">[select store]</option>
+                {{#each sids}}
+                <option value="{{id}}">{{location}}</option>
+                {{/each}}
+            </select><br>
+            
+            <input type="submit" value="Submit Purchase" id="submitnewpurch">
+        </fieldset>
+    </form>
+    <br>
+
+    <h2>View Purchases by Store:</h2>
+    <form action="/purchasesbystore" method="post" id="purchbystoreform">
+        <fieldset>
+           <label for="sid">Store: </label>
+            <select name="sid" required>
+                <option value="" disabled="disabled" selected="selected">[select store]</option>
+                <option value="">All Stores</option>
+                {{#each sids}}
+                <option value="{{id}}">{{location}}</option>
+                {{/each}}
+            </select><br>
+            
+            <input type="submit" value="View Store" id="submitpurchbystore">
+        </fieldset>
+    </form>
+    <br>
+    
+    <h2>Sales History:</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Transaction No.</th>
+                <th>Store</th>
+                <th>Model No.</th>
+                <th>Product</th>
+                <th>Qty</th>
+                <th>Customer</th>         
+            </tr>
+        </thead>
+        <tbody>
+            {{#each purchases}} 
+            <tr> 
+                <td>{{id}}</td>
+                <td>{{date}}</td> 
+                <td>{{transaction}}</td>
+                <td>{{city}}</td>
+                <td>{{model}}</td>
+                <td>{{name}}</td>
+                <td>{{qty}}</td>
+                <td>{{#if customer}}
+                        {{customer}}
+                    {{else}}
+                        [customer removed]
+                    {{/if}}      
+                </td>
+            </tr> 
+            {{/each}} 
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,44 @@
+<div class="content">
+    <ul>
+        <li> Enter a new product
+        <li> View current products
+    </ul>
+
+    <h2>Enter New Product:</h2>
+    <form action="/enterproduct" method="post" id="productentryform">
+        <fieldset>
+            <label for="model">Model No: </label>
+            <input type="text" name="model" required><br>
+            
+            <label for="name">Product Name: </label>
+            <input type="text" name="name" required><br>
+            
+            <label for="price">Price: $</label>
+            <input type="number" name="price" min="1" step="any" required><br>
+            <br>
+
+            <input type="submit" value="Submit Product" id="submitnewprod">
+        </fieldset>
+    </form>
+    <br>
+
+    <h2>Current Products:</h2>
+    <table>
+        <thead>
+            <tr>
+              <th>Id</th>
+              <th>Product</th>
+              <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each products}} 
+            <tr> 
+                <td>{{id}}</td>
+                <td>{{modeldesc}}</td> 
+                <td>$ {{price}}</td>
+            </tr> 
+            {{/each}} 
+        </tbody>
+    </table>
+</div>

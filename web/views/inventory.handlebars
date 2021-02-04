@@ -1,0 +1,60 @@
+<div class="content">
+    <ul>
+        <li> Enter store inventory
+        <li> View current store inventory
+        <li> Remove store inventory
+    </ul>
+
+    <h2>Enter Store Inventory:</h2>
+    <form action="/enterinventory" method="post" id="inventryform">
+        <fieldset>
+            <label for="sid">Store: </label>
+            <select name="sid" required>
+                <option value="" disabled="disabled" selected="selected">[select store]</option>
+                {{#each sids}}
+                <option value="{{id}}">{{location}}</option>
+                {{/each}}
+            </select><br>
+            
+            <label for="pid">Product: </label>
+            <select name="pid" required>
+                <option value="" disabled="disabled" selected="selected">[select product]</option>
+                {{#each pids}}
+                <option value="{{id}}">{{modeldesc}}</option>
+                {{/each}}
+            </select><br>
+            
+            <label for="qty">Quantity: </label>
+            <input type="number" name="qty" min="0" required><br>
+            <br>
+
+            <input type="submit" value="Submit Inventory" id="submitnewinv">
+        </fieldset>
+    </form>
+    <br>
+
+    <h2>Current Inventory:</h2>
+    <table>
+        <thead>
+            <tr>
+              <th>Product Id</th>
+              <th>Product Model No.</th>
+              <th>Store Id</th>
+              <th>Store Location</th>
+              <th>Qty in Stock</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each inventories}} 
+            <tr> 
+                <td>{{pid}}</td>
+                <td>{{model}}</td> 
+                <td>{{sid}}</td>
+                <td>{{location}}</td>
+                <td>{{qty}}</td>
+                <td><form id="deletebutton" method="post"><button formaction="/deleteinventory/{{sid}}/{{pid}}">Delete</button></form></td>
+            </tr> 
+            {{/each}} 
+        </tbody>
+    </table>
+</div>
